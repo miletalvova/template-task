@@ -1,2 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-const a = 19;
+/* eslint-disable import/prefer-default-export */
+function addNumbers(a, b) {
+  return a + b;
+}
+
+export { addNumbers };
