@@ -60,7 +60,13 @@ package.json
 
 README.md
 ```
-## _4. Husky and lin-staged istalling and configuration_
+
+Add a script in package.json to call Prettier to format our code:
+```
+
+"format": "prettier --check ."
+```
+## _4. Husky and lint-staged istalling and configuration_
 
 ```
 npm install --save-dev husky lint-staged
@@ -82,9 +88,8 @@ The pre-commit file should look as following:
 
 npx lint-staged
 ```
-_Add the script above to your pre-commit file if it differs from the one above_
+_Add the script above to your pre-commit file if it differs from the one above._
 
-```
 In your package.json add the following code to run ESLint and Prettier on our JavaScript files:
 
 ```
@@ -94,6 +99,72 @@ In your package.json add the following code to run ESLint and Prettier on our Ja
     "prettier --write",
   ]
 }
+```
+
+## _5. Configuring Jest for testing_
+
+Run the following command to install jest dependencies
+```
+npm install --save-dev jest
+```
+Add a script in package.json to run our tests:
+```
+"test": "jest"
+```
+
+Create a file called math.js and add the following code, which is a basic function that adds two values:
+```
+/* eslint-disable import/prefer-default-export */
+function addNumbers(a, b) {
+ return a + b;
+}
+
+export { addNumbers };
+```
+Create a file called math.test.js and add the following code:
+```
+
+import { addNumbers } from './math';
+
+test('adds 1 + 2 to equal 3', () => {
+  expect(addNumbers(1, 2)).toBe(3);
+```
+## _6. .gitignore_
+Create a .gitignore file and add node_modules to it.
+```
+
+node_modules/
+```
+
+## _7. Creating the GitHub Action workflow_
+- Create a .github/workflows directory in the root of your project.
+- Add the following config to your main.yml file:
+```
+name: JavaScript Workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Run Prettier
+        run: npm run format
+      - name: Run ESLint
+        run: npm run lint
+      - name: Run tests
+        run: npm run test
+```
+
+## _8. Finally push your code_
 ```
 
 git add .
