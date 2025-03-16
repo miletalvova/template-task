@@ -15,16 +15,16 @@ npm init -y
 ```
 
 ## _3. Installing ESLint and Prettier_
-
+- Run the following command to install ESLint and Prettier dependencies
 ```
 npm install --save-dev prettier eslint@8.56.0 eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb-base eslint-plugin-import
 ```
-Generate an ESlint config file
+- Generate an ESlint config file
 ```
 npx eslint init
 ```
 
-Change your .eslintrc-cjs configurations:
+- Change your .eslintrc-cjs configurations:
 ```
 module.exports = {
   extends: ['airbnb-base', 'prettier'],
@@ -33,18 +33,18 @@ module.exports = {
 };
 ```
 
-Setup lint script in your package.json file:
+- Setup lint script in your package.json file:
 ```
 "lint": "eslint . --fix"
 ```
-Create a .prettierrc file and add the following:
+- Create a .prettierrc file and add the following:
 ```
 {
   "singleQuote": true,
   "endOfLine": "lf"
  }
 ```
-Create a .prettierignore and add the following:
+- Create a .prettierignore and add the following:
 ```
 node_modules/
 .github/
@@ -61,27 +61,28 @@ package.json
 README.md
 ```
 
-Add a script in package.json to call Prettier to format our code:
+- Add a script in package.json to call Prettier to format our code:
 ```
-
 "format": "prettier --check ."
 ```
 ## _4. Husky and lint-staged istalling and configuration_
+
+- Run the following command to install Husky and lint-staged:
 
 ```
 npm install --save-dev husky lint-staged
 ```
 
-Create and configure a .husky directory
+- Create and configure a .husky directory
 ```
 npx husky init
 ```
-Run the following command to create pre-commit hook
+- Run the following command to create pre-commit hook
 ```
 echo "npx lint-staged" > .husky/pre-commit
 ```
 
-The pre-commit file should look as following:
+- The pre-commit file should look as following:
 ```
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
@@ -90,7 +91,7 @@ npx lint-staged
 ```
 _Add the script above to your pre-commit file if it differs from the one above._
 
-In your package.json add the following code to run ESLint and Prettier on our JavaScript files:
+- In your package.json add the following code to run ESLint and Prettier on our JavaScript files:
 
 ```
 "lint-staged": {
@@ -103,16 +104,16 @@ In your package.json add the following code to run ESLint and Prettier on our Ja
 
 ## _5. Configuring Jest for testing_
 
-Run the following command to install jest dependencies
+- Run the following command to install jest dependencies:
 ```
 npm install --save-dev jest
 ```
-Add a script in package.json to run our tests:
+- Add a script in package.json to run our tests:
 ```
 "test": "jest"
 ```
 
-Create a file called math.js and add the following code, which is a basic function that adds two values:
+- Create a file called math.js and add the following code, which is a basic function that adds two values:
 ```
 /* eslint-disable import/prefer-default-export */
 function addNumbers(a, b) {
@@ -121,15 +122,15 @@ function addNumbers(a, b) {
 
 export { addNumbers };
 ```
-Create a file called math.test.js and add the following code:
+- Create a file called math.test.js and add the following code:
 ```
-
 import { addNumbers } from './math';
 
 test('adds 1 + 2 to equal 3', () => {
   expect(addNumbers(1, 2)).toBe(3);
 ```
 ## _6. .gitignore_
+
 Create a .gitignore file and add node_modules to it.
 ```
 
@@ -166,7 +167,6 @@ jobs:
 
 ## _8. Finally push your code_
 ```
-
 git add .
 git commit -m "Initial commit"
 git push
